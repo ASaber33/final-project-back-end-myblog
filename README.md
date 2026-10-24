@@ -36,12 +36,12 @@ The Vite server proxies API requests to `http://localhost:3100`. To run the prod
 
 Deploy the repository root as one Railway service. `railway.json` builds the frontend and checks the server, starts Express, and uses `/health` as its health check. Set these variables in Railway:
 
-- `DATABASE_URL` — PostgreSQL connection string
-- `JWT_SECRET` — a private random secret (at least 32 characters)
+- `DATABASE_URL` — the actual PostgreSQL connection string. Add a PostgreSQL service in the same Railway project, then reference its generated connection string from the app service (for example, `${{Postgres.DATABASE_URL}}`, replacing `Postgres` with the database service's name). The suggested value `postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require` is only a placeholder and will not connect.
+- `JWT_SECRET` — a private random secret (at least 32 characters); replace any suggested `replace_with_...` value.
 - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` — Gmail SMTP settings for password reset email
 - `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER` — Twilio settings for password reset SMS
 
-Railway supplies `PORT` automatically. Do not upload `.env`, `node_modules`, or `frontend/dist`; Railway installs dependencies and builds the frontend during deployment.
+Railway supplies `PORT` automatically. Do not click **Add** on suggested placeholder values without replacing them with real credentials. After setting the database URL and JWT secret, redeploy and confirm `/health` reports `{"status":"ok","database":"connected"}`. Do not upload `.env`, `node_modules`, or `frontend/dist`; Railway installs dependencies and builds the frontend during deployment.
 
 ## Password reset delivery
 
