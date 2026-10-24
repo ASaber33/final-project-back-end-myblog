@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Build output and local caches
+/dist/
+/frontend/dist/
+**/.vite/
+/coverage/
+*.tsbuildinfo
+# Local source artwork; the deployed splash lives in frontend/public/.
+/file.png
+/splash.png
+
+# Local tooling metadata
+.neon/
+.postman/
+.agents/
+.codex/
+skills-lock.json
+
+# OS and npm logs
+.DS_Store
+Thumbs.db
+npm-debug.log*
